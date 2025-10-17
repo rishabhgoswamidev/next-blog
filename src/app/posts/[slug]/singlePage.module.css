@@ -1,0 +1,109 @@
+.container{
+
+}
+
+.infoContainer{
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.textContainer{
+  flex: 1;
+}
+
+.text{
+  font-size: 54px;
+  margin-bottom: 30px;
+}
+
+.user{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+
+.userImageContainer{
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+
+.avatar{
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.userTextContainer{
+  display: flex;
+  flex-direction: column;
+  color: var(--softTextColor);
+}
+
+.username{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.date{
+  font-size: 12px;
+}
+
+
+.imageContainer{
+  flex: 1;
+  position: relative;
+  height: 350px;
+ 
+}
+
+.image{
+  object-fit: cover;
+}
+
+.content{
+  display: flex;
+  gap: 50px;
+}
+
+.post{
+  margin-top: 40px;
+  flex: 5;
+
+}
+
+.desc p{
+  font-size: 20px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 1536px) {
+ .title{
+  font-size: 54px;
+ } 
+}
+
+@media screen and (max-width: 1280px) {
+ .title{
+  font-size: 48px;
+ } 
+}
+
+@media screen and (max-width: 1024px) {
+ .imageContainer{
+  display: none;
+ } 
+}
+
+@media screen and (max-width: 648px) {
+ .title{
+  font-size: 32px;
+ } 
+
+ .desc p{
+  font-size: 18px;
+ }
+}
+

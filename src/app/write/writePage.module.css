@@ -1,0 +1,128 @@
+.container {
+  padding: 20px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 54px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: var(--textColor);
+}
+
+.editor {
+  position: relative;
+}
+
+
+.editBar{
+  display: flex;
+  gap: 10px;
+}
+
+.add{
+  display: flex;
+  gap: 10px;
+
+}
+
+.button,.addButton{
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1px solid var(--textColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--textColor);
+  cursor: pointer;
+}
+
+.addButton{
+  border: 1px solid green;
+}
+
+.button:hover {
+  background-color: rgb(75, 75, 75);
+  color: white;
+}
+
+.addButton:hover {
+  background-color: rgb(75, 75, 75);
+  color: white;
+}
+
+
+/* Parent flex container for toolbar + editor */
+.editorWrapper {
+  width: 100%;
+  border-radius: 8px;
+  background: #fff;
+  margin-top: 18px;
+  background-color: transparent;
+}
+
+/* Editor container grows to fill space */
+.editorContainer {
+  flex-grow: 1;
+  min-width: 0; /* prevents content from overflowing */
+  border: 1px solid var(--textColor);
+  border-radius: 4px;
+  padding: 12px;
+}
+
+/* Toolbar on the left */
+.toolbar {
+  display: flex;
+  margin-bottom: 10px;
+  margin-right: 8px;
+  gap: 5px; /* spacing between buttons */
+}
+
+.toolbar button {
+  padding: 6px 10px;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid var(--textColor);
+  border-radius: 4px;
+  color: var(--textColor);
+}
+
+.toolbar button:hover {
+  background-color: rgb(75, 75, 75);
+  color: white;
+}
+
+.active {
+  background-color: rgb(0, 92, 230);
+  color: white;
+}
+
+/* Tiptap EditorContent wrapper */
+.editorContent {
+  font-size: 18px;
+}
+
+
+.textArea div{
+  outline: none;
+  border: 1px solid var(--textColor);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.publish{
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #1a8917;
+  color: white;
+  cursor: pointer;
+}

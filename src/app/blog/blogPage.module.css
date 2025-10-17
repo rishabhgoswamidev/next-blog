@@ -1,0 +1,12 @@
+.title{
+  background-color: rgb(240, 124, 0);
+  padding: 10px 20px;
+  color: white;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.content{
+  display: flex;
+  gap: 50px;
+}
