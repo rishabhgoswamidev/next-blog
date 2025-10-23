@@ -4,7 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 const getData = async () => {
-  const res = await fetch("http://localhost:3000/api/categories", {
+  // ✅ Use absolute URL instead of relative
+  const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
+
+  const res = await fetch(`${baseUrl}/api/categories`, {
     cache: "no-store",
   });
 
@@ -20,7 +23,7 @@ const CategoryList = async () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Populer Categories</h1>
+      <h1 className={styles.title}>Popular Categories</h1>
       <div className={styles.categories}>
         {data?.map((item) => (
           <Link

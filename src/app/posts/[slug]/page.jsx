@@ -4,56 +4,64 @@ import Menu from "@/components/Menu/Menu";
 import Comments from "@/components/Comments/Comments";
 
 const getData = async (slug) => {
-  const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
+  // ✅ Use absolute URL for server-side fetch
+  const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
+  const res = await fetch(`${baseUrl}/api/posts/${slug}`, {
     cache: "no-store",
   });
 
   if (!res.ok) {
-    throw new Error("Failed");
+    throw new Error("Failed to fetch post data");
   }
 
   return res.json();
 };
 
 const SinglePage = async ({ params }) => {
-  const { slug } = await params;
+  // ✅ params is already an object
+  const { slug } = params;
 
+  // ✅ Await the data properly
   const data = await getData(slug);
+
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.textContainer}>
           <h1 className={styles.text}>{data?.title}</h1>
           <div className={styles.user}>
-            {data?.user.image && (
+            {data?.user?.image && (
               <div className={styles.userImageContainer}>
                 <Image
                   src={data.user.image}
                   alt=""
                   fill
                   className={styles.avatar}
-                ></Image>
+                />
               </div>
             )}
             <div className={styles.userTextContainer}>
-              <span className={styles.username}>{data?.user.name}</span>
+              <span className={styles.username}>{data?.user?.name}</span>
               <span className={styles.date}>{data?.createdAt}</span>
             </div>
           </div>
         </div>
 
-        { data?.img && <div className={styles.imageContainer}>
-          <Image src={data.img} alt="" fill className={styles.image}></Image>
-        </div>}
+        {data?.img && (
+          <div className={styles.imageContainer}>
+            <Image src={data.img} alt="" fill className={styles.image} />
+          </div>
+        )}
       </div>
 
       <div className={styles.content}>
         <div className={styles.post}>
-          <div className={styles.desc} dangerouslySetInnerHTML={{ __html: data?.desc }}>
-            
-          </div>
+          <div
+            className={styles.desc}
+            dangerouslySetInnerHTML={{ __html: data?.desc }}
+          />
           <div className={styles.comment}>
-            <Comments postSlug={slug}/>
+            <Comments postSlug={slug} />
           </div>
         </div>
         <Menu />

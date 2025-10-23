@@ -1,5 +1,3 @@
-"use client";
-
 import { Suspense } from "react";
 import styles from "./homepage.module.css";
 import Featured from "@/components/Featured/Featured";
