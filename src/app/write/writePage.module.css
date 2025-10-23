@@ -33,7 +33,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: transparent;
+  background-color: rgb(0, 0, 0);
   border: 1px solid var(--textColor);
   display: flex;
   justify-content: center;
@@ -86,7 +86,6 @@
 .toolbar button {
   padding: 6px 10px;
   cursor: pointer;
-  background-color: transparent;
   border: 1px solid var(--textColor);
   border-radius: 4px;
   color: var(--textColor);
@@ -98,7 +97,7 @@
 }
 
 .active {
-  background-color: rgb(0, 92, 230);
+  background-color: rgb(0, 193, 42);
   color: white;
 }
 
