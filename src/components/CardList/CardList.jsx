@@ -17,9 +17,12 @@ const CardList = ({ cat, page: initialPage }) => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch(`/api/posts?page=${page}&cat=${cat || ""}`, {
-          cache: "no-store",
-        });
+        const res = await fetch(
+          `${window.location.origin}/api/posts?page=${page}&cat=${cat || ""}`,
+          {
+            cache: "no-store",
+          }
+        );
         const data = await res.json();
         setPosts(data.posts);
         setCount(data.count);
