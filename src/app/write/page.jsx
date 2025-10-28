@@ -1,4 +1,5 @@
-"use client";
+ "use client";
+export const dynamic = "force-dynamic"; // ⛔ prevent Vercel from prerendering this page
 
 import { useEffect, useState } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
@@ -18,10 +19,10 @@ const WritePage = () => {
   const { status } = useSession();
   const router = useRouter();
 
-  // ✅ Always call useEditor (don’t wrap it in condition)
+  // ✅ Always initialize the editor outside conditions
   const editor = useEditor({
     extensions: [StarterKit],
-    editorProps: { attributes: { className: styles.editorContent } },
+    editorProps: { attributes: { class: styles.editorContent } },
     content: "",
     immediatelyRender: false,
     onUpdate: ({ editor }) => setContent(editor.getHTML()),
@@ -35,8 +36,14 @@ const WritePage = () => {
     if (status === "unauthenticated") router.push("/");
   }, [status, router]);
 
+  // ✅ Upload image to Supabase Storage
   const uploadImage = async (selectedFile) => {
     if (!selectedFile) return;
+
+    if (!supabase) {
+      alert("Supabase is not configured properly!");
+      return;
+    }
 
     const filePath = `public/${Date.now()}_${selectedFile.name}`;
     const { error } = await supabase.storage
@@ -45,6 +52,7 @@ const WritePage = () => {
 
     if (error) {
       console.error("Upload error:", error.message);
+      alert("❌ Upload failed");
       return;
     }
 
@@ -62,6 +70,7 @@ const WritePage = () => {
       .replace(/[\s_-]+/g, "-")
       .replace(/^-+|-+$/g, "");
 
+  // ✅ Publish post
   const handleSubmit = async () => {
     try {
       const res = await fetch("/api/posts", {
@@ -85,8 +94,9 @@ const WritePage = () => {
     }
   };
 
-  if (!mounted || !editor || status === "loading")
+  if (!mounted || !editor || status === "loading") {
     return <p>Loading editor...</p>;
+  }
 
   return (
     <div className={styles.container}>
@@ -117,10 +127,10 @@ const WritePage = () => {
                 </label>
               </button>
               <button className={styles.addButton}>
-                <Image src="/share.png" alt="Image" width={16} height={16} />
+                <Image src="/share.png" alt="Share" width={16} height={16} />
               </button>
               <button className={styles.addButton}>
-                <Image src="/video.png" alt="Image" width={16} height={16} />
+                <Image src="/video.png" alt="Video" width={16} height={16} />
               </button>
             </div>
           )}
