@@ -1,4 +1,5 @@
 import CardList from "@/components/CardList/CardList";
+//fixed
 import styles from "./blogPage.module.css";
 import Menu from "@/components/Menu/Menu";
 
