@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'; // This is correct for your setup
+import { PrismaClient } from '@/generated/prisma'; // ✅ Correct for your custom output
 
 let prisma;
 if (process.env.NODE_ENV === 'production') {
