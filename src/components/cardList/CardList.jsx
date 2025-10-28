@@ -5,23 +5,32 @@ import Pagination from "../Pagination/Pagination";
 import Card from "../Card/Card";
 import { useSearchParams } from "next/navigation";
 
-const CardList = ({ cat }) => {
+const POST_PER_PAGE = 2;
+
+const CardList = ({ cat, page: initialPage }) => {
+  const searchParams = useSearchParams();
+  const page = parseInt(searchParams.get("page") || initialPage || 1, 10);
+
   const [posts, setPosts] = useState([]);
   const [count, setCount] = useState(0);
-  const searchParams = useSearchParams();
-  const page = parseInt(searchParams.get("page")) || 1;
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch(`/api/posts?page=${page}&cat=${cat || ""}`);
-      const data = await res.json();
-      setPosts(data.posts);
-      setCount(data.count);
+      try {
+        const res = await fetch(`/api/posts?page=${page}&cat=${cat || ""}`, {
+          cache: "no-store",
+        });
+        const data = await res.json();
+        setPosts(data.posts);
+        setCount(data.count);
+      } catch (error) {
+        console.error("Failed to fetch posts:", error);
+      }
     };
+
     fetchPosts();
   }, [page, cat]);
 
-  const POST_PER_PAGE = 2;
   const hasPrev = POST_PER_PAGE * (page - 1) > 0;
   const hasNext = POST_PER_PAGE * (page - 1) + POST_PER_PAGE < count;
 
