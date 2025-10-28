@@ -15,24 +15,30 @@ const CardList = ({ cat, page: initialPage }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const res = await fetch(
-          `${window.location.origin}/api/posts?page=${page}&cat=${cat || ""}`,
-          {
-            cache: "no-store",
-          }
-        );
-        const data = await res.json();
-        setPosts(data.posts);
-        setCount(data.count);
-      } catch (error) {
-        console.error("Failed to fetch posts:", error);
-      }
-    };
+  const fetchPosts = async () => {
+    try {
+      const origin =
+        typeof window !== "undefined"
+          ? window.location.origin
+          : process.env.NEXTAUTH_URL;
 
-    fetchPosts();
-  }, [page, cat]);
+      const res = await fetch(
+        `${origin}/api/posts?page=${page}&cat=${cat || ""}`,
+        { cache: "no-store" }
+      );
+
+      if (!res.ok) throw new Error(`Failed to fetch posts: ${res.status}`);
+      const data = await res.json();
+      setPosts(data.posts);
+      setCount(data.count);
+    } catch (error) {
+      console.error("Failed to fetch posts:", error);
+    }
+  };
+
+  fetchPosts();
+}, [page, cat]);
+
 
   const hasPrev = POST_PER_PAGE * (page - 1) > 0;
   const hasNext = POST_PER_PAGE * (page - 1) + POST_PER_PAGE < count;

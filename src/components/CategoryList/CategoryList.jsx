@@ -5,11 +5,16 @@ import Image from "next/image";
 
 const getData = async () => {
   // ✅ Use absolute URL instead of relative
-  const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
+  const baseUrl =
+  process.env.NEXTAUTH_URL ||
+  process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000";
 
-  const res = await fetch(`${baseUrl}/api/categories`, {
-    cache: "no-store",
-  });
+const res = await fetch(`${baseUrl}/api/categories`, {
+  cache: "no-store",
+});
+
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
