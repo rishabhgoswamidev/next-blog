@@ -6,7 +6,7 @@ import Image from "next/image";
 const getData = async () => {
   // ✅ Use absolute URL instead of relative
   const baseUrl =
-  process.env.NEXTAUTH_URL ||
+  process.env.NEXT_PUBLIC_URL ||
   process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
     : "http://localhost:3000";

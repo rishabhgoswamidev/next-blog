@@ -20,7 +20,7 @@ const CardList = ({ cat, page: initialPage }) => {
       const origin =
         typeof window !== "undefined"
           ? window.location.origin
-          : process.env.NEXTAUTH_URL;
+          : process.env.NEXT_PUBLIC_URL;
 
       const res = await fetch(
         `${origin}/api/posts?page=${page}&cat=${cat || ""}`,

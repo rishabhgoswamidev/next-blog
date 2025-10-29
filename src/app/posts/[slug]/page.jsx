@@ -5,7 +5,7 @@ import Comments from "@/components/Comments/Comments";
 
 const getData = async (slug) => {
   // ✅ Use absolute URL for server-side fetch
-  const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "http://localhost:3000";
   const res = await fetch(`${baseUrl}/api/posts/${slug}`, {
     cache: "no-store",
   });
