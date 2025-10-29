@@ -4,23 +4,21 @@ import Link from "next/link";
 import Image from "next/image";
 
 const getData = async () => {
-  // ✅ Use absolute URL instead of relative
   const baseUrl =
-  process.env.NEXT_PUBLIC_URL ||
-  process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000";
+    process.env.NEXT_PUBLIC_URL ||
+    (process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000");
 
-const res = await fetch(`${baseUrl}/api/categories`, {
-  cache: "no-store",
-});
-
+  const res = await fetch(`${baseUrl}/api/categories`, { cache: "no-store" });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
 
-  return res.json();
+  const data = await res.json();
+  console.log(data); // optional for debugging
+  return data;
 };
 
 const CategoryList = async () => {
